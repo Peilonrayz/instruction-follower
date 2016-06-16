@@ -1,7 +1,7 @@
-import hrm
+import instruction_follower as hrm
 
 if True and __name__ == '__main__':
-    from hrm.tests import TestHRM
+    from instruction_follower.tests import TestHRM
     import unittest
     unittest.main()
 

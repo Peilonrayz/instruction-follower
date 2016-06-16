@@ -1,4 +1,4 @@
-import hrm.levels as levels
+import instruction_follower.levels as levels
 import unittest
 from os.path import join as _join
 

@@ -1,8 +1,8 @@
-import hrm
+import instruction_follower as if_
 
 def _level(*args, **kwargs):
     def wrapper(program):
-        return hrm.HRM(program, *args, **kwargs)
+        return if_.HRM(program, *args, **kwargs)
     return wrapper
 
 level1 = _level()
