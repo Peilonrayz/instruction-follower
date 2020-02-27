@@ -1,5 +1,5 @@
 Welcome to Instruction Follower's documentation!
-===============================
+================================================
 
 .. toctree::
    :maxdepth: 2

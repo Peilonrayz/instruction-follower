@@ -1,11 +1,11 @@
 import unittest
 from os.path import join as _join
 
-import hrm.levels as levels
+import instruction_follower.levels as levels
 
 
 def _read(file_name):
-    with open(_join("test_programs", file_name), "r") as f:
+    with open(_join("test_programs", "programs", file_name), "r") as f:
         return f.read()
 
 

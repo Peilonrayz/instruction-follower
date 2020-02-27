@@ -1,9 +1,9 @@
-import hrm
+from .hrm import HRM
 
 
 def _level(*args, **kwargs):
     def wrapper(program):
-        return hrm.HRM(program, *args, **kwargs)
+        return HRM(program, *args, **kwargs)
 
     return wrapper
 
