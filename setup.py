@@ -45,5 +45,7 @@ setup(
         "Programming Language :: Python :: 3.8",
     ],
     keywords="",
-    entry_points={"console_scripts": ["instruction_follower=instruction_follower.__main__:main"]},
+    entry_points={
+        "console_scripts": ["instruction_follower=instruction_follower.__main__:main"]
+    },
 )

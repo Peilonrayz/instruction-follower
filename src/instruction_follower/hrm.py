@@ -11,8 +11,8 @@ class TileError(HRMException):
         super().__init__(
             "Bad tile address! "
             "Tile with address {} does not exist! "
-            "Where do you think you're going?"
-            .format(data))
+            "Where do you think you're going?".format(data)
+        )
 
 
 class OutOfBoundsError(HRMException):
@@ -20,7 +20,8 @@ class OutOfBoundsError(HRMException):
         super().__init__(
             "Overflow! "
             "Each data unit is restricted to values between -999 and 999. "
-            "That should be enough for anybody.")
+            "That should be enough for anybody."
+        )
 
 
 class OperandsError(HRMException):
@@ -28,12 +29,15 @@ class OperandsError(HRMException):
         super().__init__(
             "You can't {0} with mixed operands! "
             "{0}'ing between one letter and one number is invalid. "
-            "Only nice respectable pairs of two letters or two numbers are allowed.! "
-            .format(operator))
+            "Only nice respectable pairs of two letters or two numbers are allowed.! ".format(
+                operator
+            )
+        )
 
 
 class HRMType:
     letters = set()
+
     def get(self, *_):
         return self.data
 
@@ -45,18 +49,21 @@ class Empty(HRMType):
 
 class Number(HRMType):
     letters = set(string.digits)
+
     def __init__(self, data):
         self.data = int(data)
 
 
 class Word(HRMType):
     letters = set(string.ascii_letters)
+
     def __init__(self, data):
         self.data = str(data)
 
 
 class Pointer:
-    letters = set('[]')
+    letters = set("[]")
+
     def __init__(self, other):
         self.other = other
         self.letters |= other.letters
@@ -66,8 +73,8 @@ class Pointer:
     def __call__(self, data):
         data = str(data)
         self.pointer = False
-        if data[0] == '[':
-            if data[-1] != ']':
+        if data[0] == "[":
+            if data[-1] != "]":
                 raise HRMException("Mismatched parenths")
             self.pointer = True
             data = data[1:-1]
@@ -89,7 +96,7 @@ class HRMBox:
             return
         self.word = False
         data = str(data)
-        if set(data) <= set(string.digits + '-'):
+        if set(data) <= set(string.digits + "-"):
             data = int(data)
         elif not len(data):
             raise ValueError("HRMBox needs to be at least a size of one.")
@@ -125,20 +132,20 @@ class HRMBox:
         return self.__int__()
 
     def __repr__(self):
-        return 'HRMBox({})'.format(self.item)
+        return "HRMBox({})".format(self.item)
 
     def __sub__(self, other):
         if not isinstance(other, HRMBox):
             other = HRMBox(other)
         if self.word is not other.word:
-            raise OperandsError('')
+            raise OperandsError("")
         return HRMBox(self.data - other.data)
 
     def __add__(self, other):
         if not isinstance(other, HRMBox):
             other = HRMBox(other)
         if self.word is not other.word:
-            raise OperandsError('')
+            raise OperandsError("")
         return HRMBox(self.data + other.data)
 
     def __eq__(self, other):
@@ -153,15 +160,20 @@ class HRMBox:
 
 
 COMMANDS = {}
+
+
 def hrm_fn(*types):
     def wrap(fn):
         def call(self, *args):
             def data():
                 fn(self, *[t(a).get(self) for t, a in zip(types, args)])
+
             return data
+
         call.letters = [t.letters for t in types]
         COMMANDS[fn.__name__.upper()[1:]] = call
         return call
+
     return wrap
 
 
@@ -173,7 +185,7 @@ class HRM:
         self.labels = {
             places[0]: i
             for i, (command, places) in enumerate(self.tokens)
-            if command == 'LABEL'
+            if command == "LABEL"
         }
         self.tiles = [None for _ in range(tiles)]
         for tile, value in tile_defaults.items():
@@ -207,16 +219,13 @@ class HRM:
         self.output = []
         self.command = 0
         self.hand = None
-        commands = [
-            COMMANDS[command](self, *value)
-            for command, value in self.tokens
-        ]
+        commands = [COMMANDS[command](self, *value) for command, value in self.tokens]
         while True:
             try:
                 commands[self.command]()
-            except IndexError: # No more commands
+            except IndexError:  # No more commands
                 break
-            except StopIteration: # No more input
+            except StopIteration:  # No more input
                 break
             self.command += 1
         return self.output
@@ -280,17 +289,19 @@ class HRM:
 
 
 COMMAND_TYPES = {command: fn.letters for command, fn in COMMANDS.items()}
+
+
 def tokenise(hrm_string):
-    for line in hrm_string.split('\n'):
+    for line in hrm_string.split("\n"):
         line = line.strip()
-        if re.match('--', line) is not None:
+        if re.match("--", line) is not None:
             continue
-        label = re.match('(\w+):', line)
+        label = re.match("(\w+):", line)
         if label is not None:
-            yield 'LABEL', label.group(1)
+            yield "LABEL", label.group(1)
             continue
         expression = line.split()
-        if expression and all(re.match('\w+|\[\w+\]$', e) for e in expression):
+        if expression and all(re.match("\w+|\[\w+\]$", e) for e in expression):
             yield expression
             continue
 
@@ -299,6 +310,7 @@ def remove_invalid_tokens(tokens):
     for command, *values in tokens:
         command = command.upper()
         command_types = COMMAND_TYPES.get(command, None)
-        if (command_types is not None and
-            all(set(v) <= c for c, v in zip(command_types, values))):
+        if command_types is not None and all(
+            set(v) <= c for c, v in zip(command_types, values)
+        ):
             yield command, values
