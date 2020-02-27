@@ -1,0 +1,25 @@
+=> main
+:: zeroouter
+copyto 5
+inbox
+:: zero
+copyfrom 5
+:: output
+outbox
+:: main
+inbox
+0> zeroouter
+copyto 0
+copyto 5
+inbox
+0> output
+copyto 1
+bumpdn 1
+0> zero
+:: loop
+copyfrom 5
+add 0
+copyto 5
+bumpdn 1
+0> zero
+=> loop

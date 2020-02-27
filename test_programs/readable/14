@@ -1,0 +1,13 @@
+:: loop
+inbox
+copyto 0
+inbox
+sub 0
+-> if
+add 0
+=> else
+:: if
+copyfrom 0
+:: else
+outbox
+=> loop

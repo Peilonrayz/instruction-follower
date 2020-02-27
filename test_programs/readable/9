@@ -1,0 +1,7 @@
+=> loop
+:: loopz
+outbox
+:: loop
+inbox
+0> loopz
+=> loop

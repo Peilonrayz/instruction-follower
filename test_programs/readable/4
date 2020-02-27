@@ -1,0 +1,5 @@
+:: loop
+place 0
+through
+take 0
+=> loop

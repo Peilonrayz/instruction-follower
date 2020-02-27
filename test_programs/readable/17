@@ -1,0 +1,17 @@
+=> main
+:: same
+copyfrom 4
+:: output
+outbox
+:: main
+inbox
+-> else
+inbox
+-> different
+=> same
+:: else
+inbox
+-> same
+:: different
+copyfrom 5
+=> output

@@ -1,0 +1,6 @@
+:: loop
+place 0
+inbox
+add 0
+outbox
+=> loop

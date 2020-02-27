@@ -1,0 +1,10 @@
+=> loop
+:: loopz
+copyfrom 0
+outbox
+:: loop
+place 0
+inbox
+sub 0
+0> loopz
+=> loop

@@ -1,0 +1,12 @@
+:: outerloop
+place 0
+:: loop
+outbox
+copyfrom 0
+0> outerloop
+-> negative
+bumpdn 0
+=> loop
+:: negative
+bumpup 0
+=> loop

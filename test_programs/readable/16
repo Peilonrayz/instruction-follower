@@ -1,0 +1,11 @@
+=> main
+:: loopn
+copyto 0
+sub 0
+sub 0
+:: loop
+outbox
+:: main
+inbox
+-> loopn
+=> loop

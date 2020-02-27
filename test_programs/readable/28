@@ -1,0 +1,21 @@
+:: loop
+place 0
+place 1
+place 2
+:: a
+gt 0 1
+0> b
+swap 0 1 5
+:: b
+gt 0 2
+0> c
+swap 0 2 6
+:: c
+gt 1 2
+0> d
+swap 1 2 6
+:: d
+take 0
+take 1
+take 2
+=> loop

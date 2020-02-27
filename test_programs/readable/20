@@ -1,0 +1,18 @@
+=> main
+:: zero
+copyfrom 5
+:: output
+outbox
+:: main
+place 0
+copyto 5
+inbox
+copyto 1
+0> output
+:: loop
+bumpdn 1
+0> zero
+copyfrom 5
+add 0
+copyto 5
+=> loop

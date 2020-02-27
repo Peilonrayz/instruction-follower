@@ -1,0 +1,14 @@
+:: loop
+inbox
+0> d
+:: b
+copyto 0
+inbox
+0> c
+add 0
+=> b
+:: c
+copyfrom 0
+:: d
+outbox
+=> loop

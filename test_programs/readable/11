@@ -1,0 +1,9 @@
+:: loop
+place 0
+place 1
+sub 0
+outbox
+copyfrom 0
+sub 1
+outbox
+=> loop

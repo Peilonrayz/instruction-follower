@@ -1,0 +1,20 @@
+=> main
+:: zero
+outbox
+:: main
+place 0
+0> zero
+-> negativestart
+outbox
+:: positive
+bumpdn 0
+0> zero
+outbox
+=> positive
+:: negativestart
+outbox
+:: negative
+bumpup 0
+0> zero
+outbox
+=> negative
